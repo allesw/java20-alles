@@ -28,6 +28,7 @@
             <artifactId>guava</artifactId>
             <version>${com.google.guava.version}</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -71,6 +72,39 @@
                         </manifest>
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+
+                    <obfuscate>true</obfuscate>
+                    <outjar>${project.build.finalName}-small.jar</outjar>
+                    <options>
+                        <option>-keep public class ru.alles.Main {public static void main(java.lang.String[]);</option>
+                        <option>-dontwarn</option>
+                    </options>
+                    <libs>
+                        <lib>${java.home}/jmods/java.base.jmod(!**.jar;!module-info.class)</lib>
+                    </libs>
+                </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>6.2.2</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
