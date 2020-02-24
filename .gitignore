@@ -14,7 +14,10 @@
 .idea
 target
 .DS_Store
+
+#proguard system file
 proguard
+proguard.map
 
 # Package Files #
 *.jar
