@@ -76,6 +76,7 @@
             <plugin>
                 <groupId>com.github.wvengen</groupId>
                 <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.2.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -88,13 +89,17 @@
                 <configuration>
 
                     <obfuscate>true</obfuscate>
-                    <outjar>${project.build.finalName}-small.jar</outjar>
+                    <!--<outjar>${project.build.finalName}-small.jar</outjar>-->
+                    <injar>java20-01.jar</injar>
+                    <outjar>java20-01-obf.jar</outjar>
                     <options>
-                        <option>-keep public class ru.alles.Main {public static void main(java.lang.String[]);</option>
+                        <option>-printmapping proguard.map</option>
                         <option>-dontwarn</option>
+                        <option>-keep public class ru.alles.Main {public static void main(java.lang.String[]);}</option>
+
                     </options>
                     <libs>
-                        <lib>${java.home}/jmods/java.base.jmod(!**.jar;!module-info.class)</lib>
+                        <lib>${java.home}/jmods/java.base.jmod</lib>
                     </libs>
                 </configuration>
 
