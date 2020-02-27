@@ -18,6 +18,7 @@ target
 #proguard system file
 proguard
 proguard.map
+proguard.pro
 
 # Package Files #
 *.jar
